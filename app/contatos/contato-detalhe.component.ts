@@ -24,7 +24,7 @@ export class ContatoDetalheComponent implements OnInit {
 
     ngOnInit(): void {
 
-        this.contato = new Contato(0, '', '', '');
+        this.contato = new Contato('', '', '');
 
         this.route.params.forEach(params => {
             let id = +params['id'];
@@ -60,12 +60,17 @@ export class ContatoDetalheComponent implements OnInit {
 
     onSubmit(): void {
 
+        let promise;
+
         if (this.isNew) {
             console.log('Gravar contato');
+            promise = this.contatoService.create(this.contato);
         } else {
             console.log('Alterar contato');
+            promise = this.contatoService.update(this.contato);
         }
 
+        promise.then(contato => this.location.back());
     }
 
 }

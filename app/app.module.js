@@ -7,9 +7,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 const core_1 = require("@angular/core");
 const platform_browser_1 = require("@angular/platform-browser");
+const http_1 = require("@angular/http");
+const angular_in_memory_web_api_1 = require("angular-in-memory-web-api");
+const in_memory_data_service_1 = require("./in-memory-data.service");
 const app_component_1 = require("./app.component");
 const app_routing_module_1 = require("./app-routing.module");
 const contatos_module_1 = require("./contatos/contatos.module");
+const dialog_service_1 = require("./dialog.service");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -17,8 +21,11 @@ AppModule = __decorate([
         imports: [
             app_routing_module_1.AppRoutingModule,
             platform_browser_1.BrowserModule,
-            contatos_module_1.ContatosModule
+            contatos_module_1.ContatosModule,
+            http_1.HttpModule,
+            angular_in_memory_web_api_1.InMemoryWebApiModule.forRoot(in_memory_data_service_1.InMemoryDataService)
         ],
+        providers: [dialog_service_1.DialogService],
         declarations: [app_component_1.AppComponent],
         bootstrap: [app_component_1.AppComponent]
     })
